@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Minhazur Rahman Meraj - Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind Config for Custom Theme & Gradients -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#0f172a',
+                            900: '#0b0f19',
+                            950: '#05070a'
+                        },
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4' },
+                            '50%': { opacity: '0.8' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #05070a 0%, #0f172a 50%, #06231d 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #34d399, #3b82f6, #6366f1);
+            z-index: -1;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+        .gradient-border:hover::before {
+            opacity: 0.8;
+        }
+        .tool-badge {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .tool-badge:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05070a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="selection:bg-emerald-500 selection:text-navy-950 font-sans antialiased overflow-x-hidden">
+
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent animate-pulse-glow">
+                MD Minhazur Rahman Meraj
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-emerald-400 transition-colors">About</a>
+                <a href="#cybersecurity" class="hover:text-emerald-400 transition-colors">Cybersecurity</a>
+                <a href="#graphics" class="hover:text-emerald-400 transition-colors">Graphics Design</a>
+                <a href="#social-work" class="hover:text-emerald-400 transition-colors">Social Work</a>
+                <a href="#core-score" class="hover:text-emerald-400 transition-colors">Core Score</a>
+                <a href="#contact" class="hover:text-emerald-400 transition-colors">Get In Touch</a>
+            </nav>
+
+            <!-- CV Download Button -->
+            <a href="assets/cv.pdf" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gradient-to-r from-emerald-500 to-blue-600 text-white shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:scale-105 transition-all">
+                <i class="fa-solid fa-download"></i> Download CV
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none p-2">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-white/10 px-6 py-4 space-y-3">
+            <a href="#about" class="block hover:text-emerald-400 transition-colors py-1">About</a>
+            <a href="#cybersecurity" class="block hover:text-emerald-400 transition-colors py-1">Cybersecurity</a>
+            <a href="#graphics" class="block hover:text-emerald-400 transition-colors py-1">Graphics Design</a>
+            <a href="#social-work" class="block hover:text-emerald-400 transition-colors py-1">Social Work</a>
+            <a href="#core-score" class="block hover:text-emerald-400 transition-colors py-1">Core Score</a>
+            <a href="#contact" class="block hover:text-emerald-400 transition-colors py-1">Get In Touch</a>
+            <a href="assets/cv.pdf" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-emerald-500 to-blue-600 text-white mt-2">
+                <i class="fa-solid fa-download"></i> Download CV
+            </a>
+        </div>
+    </header>
+
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+        <div class="flex-1 text-center md:text-left space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 animate-bounce">
+                <i class="fa-solid fa-shield-halved"></i> Ethical Hacker & Graphic Designer
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none">
+                Hi, I'm <span class="bg-gradient-to-r from-emerald-400 via-blue-400 to-indigo-500 bg-clip-text text-transparent">MD Minhazur Rahman Meraj</span>
+            </h1>
+            <p class="text-slate-300 text-base sm:text-lg max-w-xl mx-auto md:mx-0">
+                Passionate Political Science undergrad, cybersecurity practitioner, creative graphic designer, and active community leader based in Dhaka, Bangladesh.
+            </p>
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+                <a href="#contact" class="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/25 hover:scale-105 transition-all">
+                    Get In Touch
+                </a>
+                <a href="#cybersecurity" class="px-6 py-3 rounded-xl font-semibold glass-panel border border-white/10 hover:border-emerald-500/50 hover:scale-105 transition-all">
+                    Explore Skills
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Avatar Frame (Space provided for custom image link) -->
+        <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 flex-shrink-0 animate-float">
+            <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-emerald-500 via-blue-500 to-indigo-600 blur-2xl opacity-40 animate-pulse-glow"></div>
+            <div class="relative w-full h-full rounded-3xl glass-panel p-3 border border-white/20 overflow-hidden shadow-2xl">
+                <!-- Replace 'meraj-porfolio/assets/pic.jpeg' with your exact image link or path if needed -->
+                <img src="/assets/minhazur.png" alt="MD Minhazur Rahman Meraj" class="w-full h-full object-cover rounded-2xl" onerror="this.onerror=null;this.src='https://placehold.co/400x400/0f172a/34d399?text=Merajur+Rahman';">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Professional Profile</h2>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base">About my academic and personal background</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-emerald-500/40 transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-1">Location</h3>
+                <p class="text-slate-300 text-sm">Azimpur, Dhaka, Bangladesh</p>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-blue-500/40 transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-1">Education</h3>
+                <p class="text-slate-300 text-sm">Dhaka Central University</p>
+                <p class="text-emerald-400 text-xs font-medium mt-1">Honours 2nd Year (Running)</p>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-indigo-500/40 transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-1">Major / Discipline</h3>
+                <p class="text-slate-300 text-sm">Political Science</p>
+                <p class="text-slate-400 text-xs mt-1">Focus on Governance, Policy & Society</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="cybersecurity" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20 mb-3">
+                <i class="fa-solid fa-user-secret"></i> Security Domain
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Cybersecurity & Ethical Hacking</h2>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base">Specialized software environments and powerful penetration testing tools</p>
+        </div>
+
+        <!-- Software Environments -->
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code text-emerald-400"></i> Core Virtualization & OS Software
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Oracle Virtualbox -->
+                <div class="tool-badge glass-panel p-6 rounded-2xl border border-white/10 flex items-center gap-5 bg-gradient-to-r from-blue-900/30 to-transparent">
+                    <div class="w-16 h-16 rounded-2xl p-2 bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30 flex-shrink-0">
+                        <i class="fa-solid fa-server text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-white">Oracle VirtualBox</h4>
+                        <p class="text-slate-400 text-xs mt-1">Virtualization environment for testing secure labs and running multiple operating systems.</p>
+                    </div>
+                </div>
+
+                <!-- Kali Linux -->
+                <div class="tool-badge glass-panel p-6 rounded-2xl border border-white/10 flex items-center gap-5 bg-gradient-to-r from-purple-900/30 to-transparent">
+                    <div class="w-16 h-16 rounded-2xl p-2 bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-500/30 flex-shrink-0">
+                        <i class="fa-solid fa-dragon text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-white">Kali Linux</h4>
+                        <p class="text-slate-400 text-xs mt-1">Advanced penetration testing and security auditing Linux distribution.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ethical Hacking Tools -->
+        <div>
+            <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-toolbox text-emerald-400"></i> Penetration Testing Tools
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Nmap -->
+                <div class="tool-badge glass-panel p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center shadow-lg shadow-orange-500/30 mb-4 text-white text-xl">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">Nmap</h4>
+                    <p class="text-slate-400 text-xs mt-1">Network discovery & vulnerability scanning</p>
+                </div>
+
+                <!-- Metasploit Framework -->
+                <div class="tool-badge glass-panel p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-red-600 to-rose-500 flex items-center justify-center shadow-lg shadow-red-600/30 mb-4 text-white text-xl">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">Metasploit Framework</h4>
+                    <p class="text-slate-400 text-xs mt-1">Exploit development & penetration testing</p>
+                </div>
+
+                <!-- Hashcat -->
+                <div class="tool-badge glass-panel p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-500 flex items-center justify-center shadow-lg shadow-amber-500/30 mb-4 text-white text-xl">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">Hashcat</h4>
+                    <p class="text-slate-400 text-xs mt-1">Advanced password recovery & auditing</p>
+                </div>
+
+                <!-- Burp Suite -->
+                <div class="tool-badge glass-panel p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-orange-600 to-amber-600 flex items-center justify-center shadow-lg shadow-orange-600/30 mb-4 text-white text-xl">
+                        <i class="fa-solid fa-bug"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">Burp Suite</h4>
+                    <p class="text-slate-400 text-xs mt-1">Web application security testing</p>
+                </div>
+
+                <!-- WP Scan -->
+                <div class="tool-badge glass-panel p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-lg shadow-blue-500/30 mb-4 text-white text-xl">
+                        <i class="fa-brands fa-wordpress"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">WP Scan</h4>
+                    <p class="text-slate-400 text-xs mt-1">WordPress vulnerability scanner</p>
+                </div>
+
+                <!-- Gobuster -->
+                <div class="tool-badge glass-panel p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/30 mb-4 text-white text-xl">
+                        <i class="fa-solid fa-folder-tree"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">Gobuster</h4>
+                    <p class="text-slate-400 text-xs mt-1">Directory / file & DNS busting tool</p>
+                </div>
+
+                <!-- Wireshark -->
+                <div class="tool-badge glass-panel p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/30 mb-4 text-white text-xl">
+                        <i class="fa-solid fa-water"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">Wireshark</h4>
+                    <p class="text-slate-400 text-xs mt-1">Network packet analysis & sniffing</p>
+                </div>
+
+                <!-- OWASP ZAP -->
+                <div class="tool-badge glass-panel p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 mb-4 text-white text-xl">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">OWASP ZAP</h4>
+                    <p class="text-slate-400 text-xs mt-1">Free web application scanner</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="graphics" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-500/10 text-pink-400 border border-pink-500/20 mb-3">
+                <i class="fa-solid fa-palette"></i> Creative Studio
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Graphic Design Portfolio</h2>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base">Creative visual branding powered by industry-standard software</p>
+        </div>
+
+        <!-- Software Tools -->
+        <div class="flex flex-wrap justify-center gap-6 mb-12">
+            <div class="glass-panel px-6 py-4 rounded-2xl border border-white/10 flex items-center gap-4 bg-gradient-to-r from-amber-950/40 to-transparent">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-white text-xl shadow-lg shadow-orange-500/30">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white text-sm">Adobe Illustrator</h4>
+                    <p class="text-slate-400 text-xs">Vector Graphics & Logos</p>
+                </div>
+            </div>
+
+            <div class="glass-panel px-6 py-4 rounded-2xl border border-white/10 flex items-center gap-4 bg-gradient-to-r from-blue-950/40 to-transparent">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xl shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid fa-image"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white text-sm">Adobe Photoshop</h4>
+                    <p class="text-slate-400 text-xs">Raster Editing & Banners</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10" id="filter-container">
+            <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-500 text-navy-950 shadow-md shadow-emerald-500/20 transition-all" data-filter="all">All</button>
+            <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-panel text-slate-300 hover:text-white transition-all" data-filter="logo">Logo Design</button>
+            <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-panel text-slate-300 hover:text-white transition-all" data-filter="poster">Poster & Banner</button>
+            <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-panel text-slate-300 hover:text-white transition-all" data-filter="branding">Branding</button>
+            <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-panel text-slate-300 hover:text-white transition-all" data-filter="social">Social Media</button>
+        </div>
+
+        <!-- Project Grid (4-5 projects per category mapped dynamically) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+            <!-- Project 1: Logo -->
+            <div class="project-card glass-panel rounded-2xl overflow-hidden border border-white/10 group hover:border-emerald-500/50 transition-all duration-300" data-category="logo">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="/assets/modan.png" alt="Logo Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <img src="/assets/modan logo.png" alt="Logo Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/80 backdrop-blur-md text-navy-950">Logo Design</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-white text-base">Minimalist Tech Brand Logo</h3>
+                    <p class="text-slate-400 text-xs mt-1">Vector-based identity design created in Adobe Illustrator.</p>
+                </div>
+            </div>
+
+            <!-- Project 2: Poster -->
+            <div class="project-card glass-panel rounded-2xl overflow-hidden border border-white/10 group hover:border-blue-500/50 transition-all duration-300" data-category="poster">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="/assets/cyber.security.png" alt="Poster Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/80 backdrop-blur-md text-white">Poster & Banner</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-white text-base">Ethical Hacking Awareness Poster</h3>
+                    <p class="text-slate-400 text-xs mt-1">High-impact visual banner designed for tech events.</p>
+                </div>
+            </div>
+
+            <!-- Project 3: Branding -->
+            <div class="project-card glass-panel rounded-2xl overflow-hidden border border-white/10 group hover:border-indigo-500/50 transition-all duration-300" data-category="branding">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://placehold.co/600x400/0f172a/6366f1?text=Corporate+Branding" alt="Branding Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium bg-indigo-500/80 backdrop-blur-md text-white">Branding</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-white text-base">Corporate Stationery & Identity</h3>
+                    <p class="text-slate-400 text-xs mt-1">Complete brand guideline and merchandise styling.</p>
+                </div>
+            </div>
+
+            <!-- Project 4: Social Media -->
+            <div class="project-card glass-panel rounded-2xl overflow-hidden border border-white/10 group hover:border-pink-500/50 transition-all duration-300" data-category="social">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="/assets/poster-01.png" alt="Social Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium bg-pink-500/80 backdrop-blur-md text-white">Social Media</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-white text-base">Campaign Graphic Kit</h3>
+                    <p class="text-slate-400 text-xs mt-1">Engaging social media post designs for club campaigns.</p>
+                </div>
+            </div>
+
+            <!-- Project 5: Logo -->
+            <div class="project-card glass-panel rounded-2xl overflow-hidden border border-white/10 group hover:border-emerald-500/50 transition-all duration-300" data-category="logo">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://placehold.co/600x400/0f172a/10b981?text=Club+Emblem+Logo" alt="Logo Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/80 backdrop-blur-md text-navy-950">Logo Design</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-white text-base">Leo Club Emblem Design</h3>
+                    <p class="text-slate-400 text-xs mt-1">Official crest and emblem vector artwork.</p>
+                </div>
+            </div>
+
+            <!-- Project 6: Poster -->
+            <div class="project-card glass-panel rounded-2xl overflow-hidden border border-white/10 group hover:border-blue-500/50 transition-all duration-300" data-category="poster">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://placehold.co/600x400/0f172a/06b6d4?text=Health+Camp+Banner" alt="Banner Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/80 backdrop-blur-md text-white">Poster & Banner</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-white text-base">Community Health Camp Banner</h3>
+                    <p class="text-slate-400 text-xs mt-1">Large format event banner design.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graphic Design Accounts -->
+        <div class="mt-12 flex flex-wrap justify-center gap-6">
+            <a href="https://www.behance.net/meraj161" target="_blank" class="glass-panel px-6 py-3 rounded-xl border border-white/10 hover:border-blue-400 flex items-center gap-3 transition-all hover:scale-105">
+                <i class="fa-brands fa-behance text-blue-400 text-xl"></i>
+                <div>
+                    <div class="text-xs text-slate-400">View Portfolio on</div>
+                    <div class="font-bold text-white text-sm">Behance</div>
+                </div>
+            </a>
+            <a href="https://www.freelancer.com/u/meraj161" target="_blank" class="glass-panel px-6 py-3 rounded-xl border border-white/10 hover:border-cyan-400 flex items-center gap-3 transition-all hover:scale-105">
+                <i class="fa-solid fa-briefcase text-cyan-400 text-xl"></i>
+                <div>
+                    <div class="text-xs text-slate-400">Hire Me On</div>
+                    <div class="font-bold text-white text-sm">Freelancer</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="core-score" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-white/10 relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute -left-20 -top-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+            <div class="relative z-10 text-center max-w-3xl mx-auto space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <i class="fa-solid fa-chart-pie"></i> Overall Proficiency
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">My Core Score</h2>
+                <p class="text-slate-300 text-sm sm:text-base">
+                    Comprehensive evaluation combining Cybersecurity expertise, Graphic Design mastery, Academic discipline, and Social Leadership.
+                </p>
+
+                <!-- Animated Core Score Ring / Number -->
+                <div class="py-6 flex items-center justify-center">
+                    <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-full flex items-center justify-center bg-gradient-to-tr from-emerald-500 via-blue-500 to-indigo-600 p-1 shadow-2xl shadow-emerald-500/20 animate-spin-slow">
+                        <div class="w-full h-full rounded-full bg-navy-900 flex flex-col items-center justify-center p-4">
+                            <span class="text-4xl sm:text-6xl font-extrabold bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">96%</span>
+                            <span class="text-xs text-slate-400 uppercase tracking-widest mt-1 font-semibold">Excellence Score</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+                    <div class="glass-panel p-4 rounded-xl border border-white/5 text-center">
+                        <div class="text-emerald-400 font-bold text-lg sm:text-xl">95%</div>
+                        <div class="text-slate-400 text-xs mt-1">Cybersecurity</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl border border-white/5 text-center">
+                        <div class="text-blue-400 font-bold text-lg sm:text-xl">98%</div>
+                        <div class="text-slate-400 text-xs mt-1">Graphic Design</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl border border-white/5 text-center">
+                        <div class="text-indigo-400 font-bold text-lg sm:text-xl">94%</div>
+                        <div class="text-slate-400 text-xs mt-1">Leadership</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl border border-white/5 text-center">
+                        <div class="text-teal-400 font-bold text-lg sm:text-xl">97%</div>
+                        <div class="text-slate-400 text-xs mt-1">Academics</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="social-work" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+        <div class="text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-3">
+                <i class="fa-solid fa-hands-holding-child"></i> Community Impact
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Social Work & Leadership</h2>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base">Dedicated community engagement and student organizing initiatives</p>
+        </div>
+
+        <!-- Community Link Reference Note -->
+        <div class="glass-panel p-4 rounded-xl border border-white/10 text-center text-xs text-slate-300">
+            <i class="fa-solid fa-link text-emerald-400 mr-2"></i> Community Group Reference: 
+            <a href="https://www.facebook.com/groups/703092705380541/user/6157225285683" target="_blank" class="text-emerald-400 underline hover:text-emerald-300 break-all">
+                https://www.facebook.com/groups/703092705380541/user/6157225285683
+            </a>
+        </div>
+
+        <!-- Initiative 1: Leo Club -->
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-8">
+            <div class="flex flex-col md:flex-row items-center gap-6 justify-between">
+                <div class="flex items-center gap-5">
+                    <!-- Club Logo Space -->
+                    <div class="w-20 h-20 rounded-2xl glass-panel p-2 border border-white/20 flex items-center justify-center flex-shrink-0 bg-slate-900 overflow-hidden shadow-lg">
+                        <!-- Space for club logo image link -->
+                        <img src="/assets/leo_logo.png" alt="Club Logo" class="w-full h-full object-cover rounded-xl" onerror="this.src='https://placehold.co/100x100/0f172a/34d399?text=Logo';">
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Community Initiative</span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mt-1">Leo Club of Govt Shahid Suhrawardy College</h3>
+                        <p class="text-slate-400 text-sm mt-1">Role / Designation: <span class="text-white font-semibold">Co-Media & Branding Director (2025-2026)</span></p>
+                        <p class="text-slate-400 text-sm mt-1">Role / Designation: <span class="text-white font-semibold">Joint Secretary(2026-2027)</span></p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <!-- Personal Photo Space -->
+                    <div class="w-16 h-16 rounded-full glass-panel p-1 border border-emerald-500/30 overflow-hidden shadow-lg">
+                        <!-- Space for personal picture link -->
+                        <img src="/assets/meraj.jpeg" alt="Merajur Rahman" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/100x100/0f172a/34d399?text=Meraj';">
+                    </div>
+                    <a href="https://www.facebook.com/leoclubgssc" target="_blank" class="px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 text-blue-400 border border-blue-500/30 hover:bg-blue-600/30 transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-facebook"></i> Visit Club Page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Social Activities Photo Grid (4 pictures: Food distribution, Health checkup, Rally, Oath taking day) -->
+            <div>
+                <h4 class="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-camera text-emerald-400"></i> Social Activity Highlights
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Photo 1 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="/assets/food.jpeg" alt="Food Distribution" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/500x350/0f172a/34d399?text=Activity+1';">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="text-xs font-medium text-emerald-400">"Food Distribution 2026"</span>
+                        </div>
+                    </div>
+
+                    <!-- Photo 2 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="/assets/health.jpg" alt="Health Checkup" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/500x350/0f172a/3b82f6?text=Activity+2';">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="text-xs font-medium text-blue-400">"Health Checkup 2025"</span>
+                        </div>
+                    </div>
+
+                    <!-- Photo 3 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="/assets/rally.jpg" alt="Rally" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/500x350/0f172a/6366f1?text=Activity+3';">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="text-xs font-medium text-indigo-400">"Rally 2026"</span>
+                        </div>
+                    </div>
+
+                    <!-- Photo 4 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="/assets/oath.jpg" alt="Oath Taking Day" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/500x350/0f172a/ec4899?text=Activity+4';">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="text-xs font-medium text-pink-400">"Oath Taking Day 2025"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Initiative 2: North Bengal Student's Association -->
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-8">
+            <div class="flex flex-col md:flex-row items-center gap-6 justify-between">
+                <div class="flex items-center gap-5">
+                    <!-- Organisation Logo Space -->
+                    <div class="w-20 h-20 rounded-2xl glass-panel p-2 border border-white/20 flex items-center justify-center flex-shrink-0 bg-slate-900 overflow-hidden shadow-lg">
+                        <!-- Space for organization logo image link -->
+                        <img src="/assets/nbas.log.png" alt="Org Logo" class="w-full h-full object-cover rounded-xl" onerror="this.src='https://placehold.co/100x100/0f172a/3b82f6?text=Logo';">
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-blue-400 uppercase tracking-wider">Volunteering & Event Management</span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mt-1">North Bengal Student's Association of DCU</h3>
+                        <p class="text-slate-400 text-sm mt-1">Role / Designation: <span class="text-white font-semibold">Co-Chief Organizer</span></p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <!-- Personal Photo Space -->
+                    <div class="w-16 h-16 rounded-full glass-panel p-1 border border-blue-500/30 overflow-hidden shadow-lg">
+                        <!-- Space for personal picture link -->
+                        <img src="/assets/me.png" alt="Merajur Rahman" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/100x100/0f172a/3b82f6?text=Meraj';">
+                    </div>
+                    <a href="https://www.facebook.com/profile.php?id=61572252856832" target="_blank" class="px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 text-blue-400 border border-blue-500/30 hover:bg-blue-600/30 transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-facebook"></i> Visit Association Page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Social Activities Photo Grid (4 pictures with captions) -->
+            <div>
+                <h4 class="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-camera text-blue-400"></i> Event Management & Social Activities
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Photo 1 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="/assets/samenar.jpg" alt="Event Gathering" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/500x350/0f172a/3b82f6?text=Event+1';">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="text-xs font-medium text-blue-400">"Annual Gathering"</span>
+                        </div>
+                    </div>
+
+                    <!-- Photo 2 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="/assets/piknic.jpg" alt="Winter Cloth Drive" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/500x350/0f172a/10b981?text=Event+2';">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="text-xs font-medium text-emerald-400">"Picnic with students"</span>
+                        </div>
+                    </div>
+
+                    <!-- Photo 3 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="/assets/event.jpg" alt="Student Seminar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/500x350/0f172a/6366f1?text=Event+3';">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="text-xs font-medium text-indigo-400">"Student Seminar"</span>
+                        </div>
+                    </div>
+
+                    <!-- Photo 4 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="h-44 overflow-hidden relative">
+                            <img src="/assets/vlounter.jpg" alt="Volunteer Team" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/500x350/0f172a/ec4899?text=Event+4';">
+                        </div>
+                        <div class="p-3 text-center">
+                            <span class="text-xs font-medium text-pink-400">"Volunteer Team Meet"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3">
+                <i class="fa-solid fa-paper-plane"></i> Let's Connect
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Get In Touch</h2>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base">Contact Information & Social Channels</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Contact Info Cards -->
+            <div class="glass-panel p-8 rounded-3xl border border-white/10 space-y-6 flex flex-col justify-center">
+                <h3 class="text-xl font-bold text-white mb-2">Contact Details</h3>
+                
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400">Email Address</div>
+                        <a href="mailto:minhazurrahman457@gmail.com" class="text-white font-semibold text-sm sm:text-base hover:text-emerald-400 transition-colors">
+                            minhazurrahman457@gmail.com
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400">WhatsApp Number</div>
+                        <a href="https://wa.me/8801810382721" target="_blank" class="text-white font-semibold text-sm sm:text-base hover:text-green-400 transition-colors">
+                            01810382721
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400">Location</div>
+                        <div class="text-white font-semibold text-sm sm:text-base">
+                            Dhaka, Bangladesh
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="pt-4 border-t border-white/10">
+                    <div class="text-xs text-slate-400 mb-3">Connect on Social Networks</div>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://www.linkedin.com/in/minhazur-rahman-meraj?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-blue-400 transition-all">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/mdminhazurrahmanmeraj161" target="_blank" class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-cyan-400 transition-all">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://www.facebook.com/meraj.oficial161" target="_blank" class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-blue-600 transition-all">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/meraj.oficial161/" target="_blank" class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-blue-600 transition-all">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://x.com/meraj_161" target="_blank" class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-blue-600 transition-all">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="glass-panel p-8 rounded-3xl border border-white/10 space-y-4">
+                <h3 class="text-xl font-bold text-white mb-2">Send a Message</h3>
+                <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Your Name</label>
+                        <input type="text" required class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white text-sm focus:outline-none focus:border-emerald-400 transition-colors" placeholder="Enter your name">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Your Email</label>
+                        <input type="email" required class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white text-sm focus:outline-none focus:border-emerald-400 transition-colors" placeholder="Enter your email">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Message</label>
+                        <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white text-sm focus:outline-none focus:border-emerald-400 transition-colors" placeholder="Write your message here..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-emerald-500 to-blue-600 text-white shadow-lg shadow-emerald-500/20 hover:scale-[1.02] transition-all">
+                        Send Message
+                    </button>
+                </form>
+                <div id="form-success-msg" class="hidden p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center">
+                    Thank you! Your message has been sent successfully.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-white/10 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>&copy; 2026 MD Minhazur Rahman Meraj. All rights reserved.</div>
+            <div class="flex items-center gap-4">
+                <a href="#about" class="hover:text-slate-300 transition-colors">About</a>
+                <a href="#cybersecurity" class="hover:text-slate-300 transition-colors">Cybersecurity</a>
+                <a href="#graphics" class="hover:text-slate-300 transition-colors">Graphics Design</a>
+                <a href="#contact" class="hover:text-slate-300 transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Graphic Design Filter Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button styles
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-emerald-500', 'text-navy-950', 'shadow-md', 'shadow-emerald-500/20');
+                    b.classList.add('glass-panel', 'text-slate-300');
+                });
+                btn.classList.remove('glass-panel', 'text-slate-300');
+                btn.classList.add('bg-emerald-500', 'text-navy-950', 'shadow-md', 'shadow-emerald-500/20');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filterValue === 'all' || category === filterValue) {
+                        card.style.display = 'block';
+                        setTimeout(() => card.style.opacity = '1', 50);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+
+        // Contact Form Submission Handler (Custom Modal/Message without alert)
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const successMsg = document.getElementById('form-success-msg');
+            successMsg.classList.remove('hidden');
+            document.getElementById('contact-form').reset();
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
